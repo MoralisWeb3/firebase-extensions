@@ -17,7 +17,7 @@ contributors:
   - authorName: Bart Tadych
     url: https://github.com/b4rtaz
 
-sourceUrl: https://github.com/MoralisWeb3/moralis-firebase-extensions
+sourceUrl: https://github.com/MoralisWeb3/firebase-extensions/tree/main/auth
 
 billingRequired: true
 

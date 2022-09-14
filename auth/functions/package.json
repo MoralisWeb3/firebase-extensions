@@ -5,7 +5,8 @@
   "main": "lib/index.js",
   "scripts": {
     "prepare": "npm run build",
-    "build": "tsc"
+    "build": "tsc",
+    "lint": "eslint --ext .js,.ts src"
   },
   "engines": {
     "node": "14"
@@ -13,10 +14,16 @@
   "author": "Moralis",
   "license": "MIT",
   "dependencies": {
+    "eslint-plugin-etc": "^2.0.2",
     "firebase-admin": "^10.0.2",
     "firebase-functions": "^3.23.0",
     "moralis": "^2.4.0",
     "typescript": "^4.8.3"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "@moralisweb3/eslint-config": "^1.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.37.0",
+    "@typescript-eslint/parser": "^5.37.0"
+  }
 }

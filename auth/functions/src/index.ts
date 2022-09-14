@@ -29,7 +29,8 @@ interface RequestEvmMessageData {
 
 export const requestMessage = functions.handler.https.onCall(async (data: RequestEvmMessageData) => {
   const now = new Date();
-  const expirationTime = new Date(now.getTime() + 86400000 /* one day */);
+  const oneDay = 86400000;
+  const expirationTime = new Date(now.getTime() + oneDay);
 
   const websiteUrl = new URL(config.websiteUri);
   const response = await Moralis.Auth.requestMessage({
