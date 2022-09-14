@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+	<meta charset="UTF-8">
+  <title>🎃 Firebase Service Account Converter</title>
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
+  <style>
+    body {font: 14px/1.1em Arial, Verdana, Serif;}
+    textarea, input[type=text] {font: 14px/1.1em 'Courier New', Courier, monospace;}
+    body {color: #000; background: #FFF;}
+    a {color: blue;}
+  </style>
+  <script>
+    function load() {
+      const jsonInput = document.getElementById('json');
+      const projectIdOutput = document.getElementById('projectId');
+      const emailOutput = document.getElementById('email');
+      const privateKeyOutput = document.getElementById('privateKey');
+
+      function convert() {
+        if (!jsonInput.value) {
+          return;
+        }
+
+        const json = JSON.parse(jsonInput.value);
+        projectIdOutput.value = json['project_id'];
+        emailOutput.value = json['client_email'];
+        privateKeyOutput.value = json['private_key']
+          .replace('\n', '')
+          .replace('-----BEGIN PRIVATE KEY-----', '')
+          .replace('-----END PRIVATE KEY-----', '');
+      }
+
+      jsonInput.addEventListener('input', convert);
+      convert();
+    }
+
+    function copy(button, id) {
+      const value = document.getElementById(id).value;
+      navigator.clipboard.writeText(value);
+      button.innerText = 'Copy ✅';
+      setTimeout(() => button.innerText = 'Copy', 2000);
+    }
+
+    window.addEventListener('load', load);
+  </script>
+</head>
+<body>
+  <h1>🎃 Firebase Service Account Converter</h1>
+
+  <p>This app converts <a href="https://firebase.google.com/support/guides/service-accounts">the Firebase service account certificate</a> to environment variables for the Moralis extension.</p>
+
+  <p>⚠️ <strong>This app doesn't send any information from this page to the server.</strong> Check the source code before you start!</p>
+
+  <p>To generate the certificate go to: <strong>Firebase Console &gt; Your Project &gt; Project Settings &gt; Service Accounts</strong> and click the <strong>Generate new private key</strong> button.</p>
+
+  <h3>Input</h3>
+
+  <p>Paste your service account JSON:</p>
+
+  <textarea id="json" cols="60" rows="20"></textarea>
+
+  <h3>Environment Variables</h3>
+
+  <p>
+    <code>SERVICE_ACCOUNT_PROJECT_ID=</code>
+    <input type="text" id="projectId">
+    <button onclick="copy(this, 'projectId')">Copy</button>
+  </p>
+
+  <p>
+    <code>SERVICE_ACCOUNT_EMAIL=</code>
+    <input type="text" id="email">
+    <button onclick="copy(this, 'email')">Copy</button>
+  </p>
+
+  <p>
+    <code>SERVICE_ACCOUNT_PRIVATE_KEY=</code>
+    <input type="text" id="privateKey">
+    <button onclick="copy(this, 'privateKey')">Copy</button>
+  </p>
+</body>
+</html>
