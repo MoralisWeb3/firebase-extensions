@@ -121,7 +121,7 @@ params:
 
   - param: WEBSITE_URI
     label: Website URI
-    description: The website URI. It should contains a folder if present.
+    description: The website URI. It should contain a folder if present.
     type: string
     example: https://website.com/my-app
     required: true
