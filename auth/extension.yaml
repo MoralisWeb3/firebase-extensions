@@ -131,7 +131,7 @@ params:
     label: Project Id of Service Account
     description: >-
       The project id of the service account. To extract this value from the service account certificate
-      you can use our converter: https://moralisweb3.github.io/moralis-firebase-extensions/serviceAccountConverter/
+      you can use our converter: https://moralisweb3.github.io/firebase-extensions/service-account-converter/
     type: string
     example: example-id
     required: true
@@ -141,7 +141,7 @@ params:
     label: E-mail of Service Account
     description: >-
       The e-mail of the service account. To extract this value from the service account certificate
-      you can use our converter: https://moralisweb3.github.io/moralis-firebase-extensions/serviceAccountConverter/
+      you can use our converter: https://moralisweb3.github.io/firebase-extensions/service-account-converter/
     type: string
     example: firebase-adminsdk-lxrdi@example-id.iam.gserviceaccount.com
     validationRegex: ^([a-zA-Z0-9]+(?:[.-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:[.-]?[a-zA-Z0-9]+)*\.[a-zA-Z]{2,7})$
@@ -154,7 +154,7 @@ params:
     label: Private Key of Service Account
     description: >-
       The private key of the service account. To extract this value from the service account certificate
-      you can use our converter: https://moralisweb3.github.io/moralis-firebase-extensions/serviceAccountConverter/
+      you can use our converter: https://moralisweb3.github.io/firebase-extensions/service-account-converter/
     type: string
     example: https://website.com/my-app
     required: true
