@@ -1,0 +1,161 @@
+name: moralis-auth
+version: 0.1.0
+specVersion: v1beta
+
+displayName: Authenticate with Moralis Auth
+
+description: >-
+  Signs in the using Moralis Auth as the identity provider.
+
+license: Apache-2.0
+
+author:
+  authorName: Moralis
+  url: https://moralis.io
+
+contributors:
+  - authorName: Bart Tadych
+    url: https://github.com/b4rtaz
+
+sourceUrl: https://github.com/MoralisWeb3/moralis-firebase-extensions
+
+billingRequired: true
+
+apis:
+  - apiName: iam.googleapis.com
+    reason: To sign custom authentication token
+  - apiName: iamcredentials.googleapis.com
+    reason: To sign custom authentication token
+  - apiName: stackdriver.googleapis.com
+    reason: Monitoring
+  - apiName: monitoring.googleapis.com
+    reason: Monitoring
+  - apiName: logging.googleapis.com
+    reason: Monitoring
+  - apiName: secretmanager.googleapis.com
+    reason: Securely storing and reading OAuth 2.0 client secret
+
+resources:
+  - name: requestMessage
+    type: firebaseextensions.v1beta.function
+    description: This function creates a message to sign by a user.
+    properties:
+      location: ${LOCATION}
+      httpsTrigger: {}
+      runtime: "nodejs14"
+  - name: issueToken
+    type: firebaseextensions.v1beta.function
+    description: This function validates a signed message by a user. If the message is correctly signed, then the function issues a custom token.
+    properties:
+      location: ${LOCATION}
+      httpsTrigger: {}
+      runtime: "nodejs14"
+
+params:
+  - param: LOCATION
+    label: Cloud Functions location
+    description: >-
+      Where do you want to deploy the functions created for this extension?
+      For help selecting a location, refer to the [location selection
+      guide](https://firebase.google.com/docs/functions/locations).
+    type: select
+    options:
+      - label: Iowa (us-central1)
+        value: us-central1
+      - label: South Carolina (us-east1)
+        value: us-east1
+      - label: Northern Virginia (us-east4)
+        value: us-east4
+      - label: Los Angeles (us-west2)
+        value: us-west2
+      - label: Salt Lake City (us-west3)
+        value: us-west3
+      - label: Las Vegas (us-west4)
+        value: us-west4
+      - label: Warsaw (europe-central2)
+        value: europe-central2
+      - label: Belgium (europe-west1)
+        value: europe-west1
+      - label: London (europe-west2)
+        value: europe-west2
+      - label: Frankfurt (europe-west3)
+        value: europe-west3
+      - label: Zurich (europe-west6)
+        value: europe-west6
+      - label: Taiwan (asia-east1)
+        value: asia-east1
+      - label: Hong Kong (asia-east2)
+        value: asia-east2
+      - label: Tokyo (asia-northeast1)
+        value: asia-northeast1
+      - label: Osaka (asia-northeast2)
+        value: asia-northeast2
+      - label: Seoul (asia-northeast3)
+        value: asia-northeast3
+      - label: Mumbai (asia-south1)
+        value: asia-south1
+      - label: Singapore (asia-southeast1)
+        value: asia-southeast1
+      - label: Jakarta (asia-southeast2)
+        value: asia-southeast2
+      - label: Montreal (northamerica-northeast1)
+        value: northamerica-northeast1
+      - label: Sao Paulo (southamerica-east1)
+        value: southamerica-east1
+      - label: Sydney (australia-southeast1)
+        value: australia-southeast1
+    required: true
+    immutable: true
+
+  - param: MORALIS_API_KEY
+    label: Moralis API Key
+    description: >-
+      The API key that is retrievable from the Moralis Admin Panel.
+    type: string
+    example: 6NkIpUJkuKlphOhBNVrpQq7fMB13v5Du5C6D90pZQRJS3bJssHblQc6Hh2rPLv3O
+    validationRegex: ^[a-zA-Z0-9]{64}$
+    validationErrorMessage: >-
+      The app ID must be retrieved from the Moralis Admin Panel.
+    required: true
+    immutable: false
+
+  - param: WEBSITE_URI
+    label: Website URI
+    description: The website URI. It should contains a folder if present.
+    type: string
+    example: https://website.com/my-app
+    required: true
+    immutable: false
+
+  - param: SERVICE_ACCOUNT_PROJECT_ID
+    label: Project Id of Service Account
+    description: >-
+      The project id of the service account. To extract this value from the service account certificate
+      you can use our converter: https://moralisweb3.github.io/moralis-firebase-extensions/serviceAccountConverter/
+    type: string
+    example: example-id
+    required: true
+    immutable: false
+
+  - param: SERVICE_ACCOUNT_EMAIL
+    label: E-mail of Service Account
+    description: >-
+      The e-mail of the service account. To extract this value from the service account certificate
+      you can use our converter: https://moralisweb3.github.io/moralis-firebase-extensions/serviceAccountConverter/
+    type: string
+    example: firebase-adminsdk-lxrdi@example-id.iam.gserviceaccount.com
+    validationRegex: ^([a-zA-Z0-9]+(?:[.-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:[.-]?[a-zA-Z0-9]+)*\.[a-zA-Z]{2,7})$
+    validationErrorMessage: >-
+      The e-mail provided has invalid format.
+    required: true
+    immutable: false
+
+  - param: SERVICE_ACCOUNT_PRIVATE_KEY
+    label: Private Key of Service Account
+    description: >-
+      The private key of the service account. To extract this value from the service account certificate
+      you can use our converter: https://moralisweb3.github.io/moralis-firebase-extensions/serviceAccountConverter/
+    type: string
+    example: https://website.com/my-app
+    required: true
+    immutable: false
