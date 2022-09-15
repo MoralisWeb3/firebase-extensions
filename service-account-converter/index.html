@@ -2,83 +2,116 @@
 <html dir="ltr" lang="en">
 <head>
 	<meta charset="UTF-8">
-  <title>🎃 Firebase Service Account Converter</title>
+  <title>Firebase Service Account Converter</title>
   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 
   <style>
-    body {font: 14px/1.1em Arial, Verdana, Serif;}
-    textarea, input[type=text] {font: 14px/1.1em 'Courier New', Courier, monospace;}
+    body {max-width: 600px; padding: 10px; margin: 0 auto; font: 14px/1.4em Arial, Verdana, Serif;}
+    .field {display: flex;}
+    textarea, input[type=text] {flex: 1; font: 14px/1.4em 'Courier New', Courier, monospace;}
+    textarea, input[type=text], button {margin: 0; padding: 5px; border: 1px solid silver; outline: 0; background: white; vertical-align: middle;}
+    button {cursor: pointer;}
     body {color: #000; background: #FFF;}
-    a {color: blue;}
+    a, code {color: blue;}
   </style>
   <script>
     function load() {
       const jsonInput = document.getElementById('json');
+      const fileInput = document.getElementById('file');
       const projectIdOutput = document.getElementById('projectId');
       const emailOutput = document.getElementById('email');
       const privateKeyOutput = document.getElementById('privateKey');
+      const outputs = [projectIdOutput, emailOutput, privateKeyOutput];
 
       function convert() {
         if (!jsonInput.value) {
           return;
         }
 
-        const json = JSON.parse(jsonInput.value);
-        projectIdOutput.value = json['project_id'];
-        emailOutput.value = json['client_email'];
-        privateKeyOutput.value = json['private_key']
-          .replace('\n', '')
-          .replace('-----BEGIN PRIVATE KEY-----', '')
-          .replace('-----END PRIVATE KEY-----', '');
+        try {
+          const json = JSON.parse(jsonInput.value);
+          projectIdOutput.value = json['project_id'];
+          emailOutput.value = json['client_email'];
+          privateKeyOutput.value = json['private_key']
+            .replace('\n', '')
+            .replace('-----BEGIN PRIVATE KEY-----', '')
+            .replace('-----END PRIVATE KEY-----', '');
+        } catch (e) {
+          console.error(e);
+          outputs.forEach(i => i.value = `Error: ${e.message}`);
+        }
       }
 
-      jsonInput.addEventListener('input', convert);
+      function onFileChange() {
+        const file = fileInput.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.addEventListener('load', () => {
+            jsonInput.value = reader.result;
+            convert();
+          }, false);
+          reader.readAsText(file);
+        }
+      }
+
+      jsonInput.addEventListener('input', convert, false);
+      fileInput.addEventListener('change', onFileChange, false);
+
       convert();
     }
 
     function copy(button, id) {
       const value = document.getElementById(id).value;
-      navigator.clipboard.writeText(value);
-      button.innerText = 'Copy ✅';
-      setTimeout(() => button.innerText = 'Copy', 2000);
+      if (value) {
+        navigator.clipboard.writeText(value);
+        button.innerText = 'Copy ✅';
+        setTimeout(() => button.innerText = 'Copy', 2000);
+      }
     }
 
-    window.addEventListener('load', load);
+    window.addEventListener('load', load, false);
   </script>
 </head>
 <body>
-  <h1>🎃 Firebase Service Account Converter</h1>
+  <h1>Firebase Service Account Converter</h1>
 
   <p>This app converts <a href="https://firebase.google.com/support/guides/service-accounts">the Firebase service account certificate</a> to environment variables for the Moralis extension.</p>
 
   <p>⚠️ <strong>This app doesn't send any information from this page to the server.</strong> Check the source code before you start!</p>
 
-  <p>To generate the certificate go to: <strong>Firebase Console &gt; Your Project &gt; Project Settings &gt; Service Accounts</strong> and click the <strong>Generate new private key</strong> button.</p>
+  <h2>📋 Certificate</h2>
 
-  <h3>Input</h3>
+  <p>Enter a JSON:</p>
 
-  <p>Paste your service account JSON:</p>
+  <div class="field">
+    <textarea id="json" cols="60" rows="10" spellcheck="false"></textarea>
+  </div>
 
-  <textarea id="json" cols="60" rows="20"></textarea>
+  <p>or choose a file: <input type="file" id="file"></p>
 
-  <h3>Environment Variables</h3>
+  <p>To generate the certificate go to <strong>Firebase Console &gt; Your Project &gt; Project Settings &gt; Service Accounts</strong> and click the <strong>Generate new private key</strong> button.</p>
 
-  <p>
-    <code>SERVICE_ACCOUNT_PROJECT_ID=</code>
-    <input type="text" id="projectId">
+  <h2>🛠 Extension Parameters</h2>
+
+  <h5>Project Id (<code>SERVICE_ACCOUNT_PROJECT_ID</code>)</h5>
+
+  <p class="field">
+    <input type="text" id="projectId" readonly>
     <button onclick="copy(this, 'projectId')">Copy</button>
   </p>
 
-  <p>
-    <code>SERVICE_ACCOUNT_EMAIL=</code>
-    <input type="text" id="email">
-    <button onclick="copy(this, 'email')">Copy</button>
-  </p>
+  <h5>E-mail (<code>SERVICE_ACCOUNT_EMAIL</code>)</h5>
 
-  <p>
-    <code>SERVICE_ACCOUNT_PRIVATE_KEY=</code>
-    <input type="text" id="privateKey">
+  <div class="field">
+    <input type="text" id="email" readonly>
+    <button onclick="copy(this, 'email')">Copy</button>
+  </div>
+
+  <h5>Private Key (<code>SERVICE_ACCOUNT_PRIVATE_KEY</code>)</h5>
+
+  <div class="field">
+    <input type="text" id="privateKey" readonly>
     <button onclick="copy(this, 'privateKey')">Copy</button>
-  </p>
+  </div>
 </body>
 </html>
