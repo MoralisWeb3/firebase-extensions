@@ -1,5 +1,5 @@
-import { FirebaseError } from '@firebase/util';
 import * as admin from 'firebase-admin';
+import { FirebaseError } from '@firebase/util';
 
 export async function userExists(auth: ReturnType<typeof admin.auth>, uid: string): Promise<boolean> {
   try {

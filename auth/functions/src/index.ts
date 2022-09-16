@@ -1,11 +1,11 @@
 
-import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
+import { cert } from 'firebase-admin/app';
+import * as functions from 'firebase-functions';
 import Moralis from 'moralis';
 import { EvmChain } from '@moralisweb3/evm-utils';
-import { userExists } from './userExists';
 import { config } from './config';
-import { cert } from 'firebase-admin/app';
+import { userExists } from './userExists';
 
 Moralis.start({
     apiKey: config.moralisApiKey,
