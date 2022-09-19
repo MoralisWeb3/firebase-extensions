@@ -1,5 +1,5 @@
 name: moralis-auth
-version: 0.1.0
+version: 0.1.1
 specVersion: v1beta
 
 displayName: Authenticate with Moralis Auth
@@ -111,7 +111,7 @@ params:
     label: Moralis API Key
     description: >-
       The API key that is retrievable from the Moralis Admin Panel.
-    type: string
+    type: secret
     example: 6NkIpUJkuKlphOhBNVrpQq7fMB13v5Du5C6D90pZQRJS3bJssHblQc6Hh2rPLv3O
     validationRegex: ^[a-zA-Z0-9]{64}$
     validationErrorMessage: >-
@@ -155,7 +155,7 @@ params:
     description: >-
       The private key of the service account. To extract this value from the service account certificate
       you can use our converter: https://moralisweb3.github.io/firebase-extensions/service-account-converter/
-    type: string
+    type: secret
     example: https://website.com/my-app
     required: true
     immutable: false

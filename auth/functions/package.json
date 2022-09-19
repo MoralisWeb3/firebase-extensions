@@ -1,7 +1,7 @@
 {
   "name": "moralis-auth-firebase-extension",
-  "version": "0.1.0",
-  "description": "Authenticate with Moralis Auth.",
+  "version": "0.1.1",
+  "description": "Authenticate with Moralis Auth",
   "main": "lib/index.js",
   "scripts": {
     "prepare": "npm run build",
