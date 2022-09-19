@@ -1,14 +1,15 @@
-
+import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import { cert } from 'firebase-admin/app';
-import * as functions from 'firebase-functions';
 import Moralis from 'moralis';
-import { EvmChain } from '@moralisweb3/evm-utils';
+import { EvmAddress, EvmChain } from '@moralisweb3/evm-utils';
+import { SolAddress, SolNetwork } from '@moralisweb3/sol-utils';
+
 import { config } from './config';
 import { userExists } from './userExists';
 
 Moralis.start({
-    apiKey: config.moralisApiKey,
+  apiKey: config.moralisApiKey,
 });
 
 const app = admin.initializeApp({
@@ -20,52 +21,122 @@ const app = admin.initializeApp({
 });
 const auth = admin.auth(app);
 
+type NetworkType = 'evm' | 'solana';
+
 // ~/ext-moralis-auth-requestMessage
 
-interface RequestEvmMessageData {
-    address: string;
-    chain: number;
+interface RequestMessageData {
+  networkType: NetworkType;
+
+  // evm:
+  evmAddress?: string;
+  evmChain?: number;
+
+  // solana:
+  solAddress?: string;
+  solNetwork?: string;
 }
 
-export const requestMessage = functions.handler.https.onCall(async (data: RequestEvmMessageData) => {
+export const requestMessage = functions.handler.https.onCall(async (data: RequestMessageData) => {
   const now = new Date();
-  const oneDay = 86400000;
-  const expirationTime = new Date(now.getTime() + oneDay);
-
+  const fifteenMinutes = 900000;
+  const expirationTime = new Date(now.getTime() + fifteenMinutes);
   const websiteUrl = new URL(config.websiteUri);
-  const response = await Moralis.Auth.requestMessage({
-    network: 'evm',
-    chain: EvmChain.create(data.chain),
+
+  const params = {
     timeout: 15,
     domain: websiteUrl.hostname,
     uri: websiteUrl.toString(),
-    statement: 'To authenticate please sign this message',
-    address: data.address,
+    statement: 'To authenticate please sign this message.',
     notBefore: now.toISOString(),
     expirationTime: expirationTime.toISOString(),
-  });
-  return response.raw;
+  };
+
+  if (data.networkType === 'evm') {
+    if (!data.evmAddress) {
+      throw new functions.https.HttpsError('invalid-argument', 'Evm address is required');
+    }
+    if (!data.evmChain) {
+      throw new functions.https.HttpsError('invalid-argument', 'Evm chain is required');
+    }
+
+    const response = await Moralis.Auth.requestMessage({
+      ...params,
+      network: 'evm',
+      address: EvmAddress.create(data.evmAddress),
+      chain: EvmChain.create(data.evmChain),
+    });
+    return response.raw;
+  }
+
+  if (data.networkType === 'solana') {
+    if (!data.solAddress) {
+      throw new functions.https.HttpsError('invalid-argument', 'Solana address is required');
+    }
+    if (!data.solNetwork) {
+      throw new functions.https.HttpsError('invalid-argument', 'Solana network is required');
+    }
+
+    const response = await Moralis.Auth.requestMessage({
+      ...params,
+      network: 'solana',
+      address: SolAddress.create(data.solAddress),
+      solNetwork: SolNetwork.create(data.solNetwork),
+    });
+    return response.raw;
+  }
+
+  throw new functions.https.HttpsError('invalid-argument', `Not supported network: ${data.networkType}`);
 });
 
 // ~/ext-moralis-auth-issueToken
 
 interface IssueTokenData {
+  networkType: NetworkType;
   message: string;
   signature: string;
 }
 
 export const issueToken = functions.handler.https.onCall(async (data: IssueTokenData) => {
-  const response = await Moralis.Auth.verify({
-    network: 'evm',
+  if (!data.message) {
+    throw new functions.https.HttpsError('invalid-argument', 'Message is required');
+  }
+  if (!data.signature) {
+    throw new functions.https.HttpsError('invalid-argument', 'Signature is required');
+  }
+
+  const params = {
     message: data.message,
     signature: data.signature,
-  });
-  const uid = response.result.profileId;
+  };
+
+  let uid: string | null = null;
+  let address: string | null = null;
+
+  if (data.networkType === 'evm') {
+    const response = await Moralis.Auth.verify({
+      ...params,
+      network: 'evm',
+    });
+    uid = response.result.profileId;
+    address = response.result.address.checksum;
+  }
+  else if (data.networkType === 'solana') {
+    const response = await Moralis.Auth.verify({
+      ...params,
+      network: 'solana',
+    });
+    uid = response.result.profileId;
+    address = response.result.address.address;
+  }
+  else {
+    throw new functions.https.HttpsError('invalid-argument', `Not supported network: ${data.networkType}`);
+  }
 
   if (!(await userExists(auth, uid))) {
     await auth.createUser({
       uid,
-      displayName: response.result.address.checksum,
+      displayName: address,
     });
   }
 
