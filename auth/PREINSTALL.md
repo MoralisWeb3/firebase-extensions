@@ -12,13 +12,10 @@ During the installation process the installer will ask you about the certificate
 
 ## Billing
 
-To install an extension, your project must be on the [Blaze (pay as you go) plan](https://firebase.google.com/pricing). This extension uses the following Firebase services:
+This extension uses the following services:
 
-* Cloud Functions
-* Firebase Authentication
-
-This extension also uses the following third-party services:
-
-* Moralis Auth API ([pricing](https://moralis.io/pricing/))
+* Firebase Cloud Functions and Firebase Authentication, this extension requires the pay as you go plan ([pricing](https://firebase.google.com/pricing))
+* [Secret Manager](https://cloud.google.com/secret-manager/) service ([pricing](https://cloud.google.com/secret-manager/pricing)) from the Google Cloud to protect a sensitive configuration of the extension
+* Moralis Auth API ([pricing](https://moralis.io/pricing/)) to handle an authentication flow.
 
 You are responsible for any costs associated with your use of these services.
