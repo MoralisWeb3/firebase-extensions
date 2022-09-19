@@ -1,6 +1,6 @@
 # Authenticate with Moralis Web3
 
-Signs in the using Moralis Auth as the identity provider.
+Signs in using Moralis Auth as the identity provider. 
 
 ### How to Install?
 
