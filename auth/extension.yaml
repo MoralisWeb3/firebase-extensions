@@ -1,5 +1,5 @@
 name: moralis-auth
-version: 0.1.1
+version: 0.1.2
 specVersion: v1beta
 
 displayName: Authenticate with Moralis Auth
@@ -157,5 +157,8 @@ params:
       you can use our converter: https://moralisweb3.github.io/firebase-extensions/service-account-converter/
     type: secret
     example: https://website.com/my-app
+    validationRegex: ^\S+$
+    validationErrorMessage: >-
+      The private key provided has invalid format.
     required: true
     immutable: false

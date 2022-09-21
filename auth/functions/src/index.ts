@@ -28,16 +28,21 @@ type NetworkType = 'evm' | 'solana';
 interface RequestMessageData {
   networkType: NetworkType;
 
+  // evm & solana:
+  address?: string;
+
   // evm:
-  evmAddress?: string;
-  evmChain?: number;
+  chain?: number;
 
   // solana:
-  solAddress?: string;
-  solNetwork?: string;
+  network?: string;
 }
 
 export const requestMessage = functions.handler.https.onCall(async (data: RequestMessageData) => {
+  if (!data.address) {
+    throw new functions.https.HttpsError('invalid-argument', 'Address is required');
+  }
+
   const now = new Date();
   const fifteenMinutes = 900000;
   const expirationTime = new Date(now.getTime() + fifteenMinutes);
@@ -53,40 +58,34 @@ export const requestMessage = functions.handler.https.onCall(async (data: Reques
   };
 
   if (data.networkType === 'evm') {
-    if (!data.evmAddress) {
-      throw new functions.https.HttpsError('invalid-argument', 'Evm address is required');
-    }
-    if (!data.evmChain) {
-      throw new functions.https.HttpsError('invalid-argument', 'Evm chain is required');
+    if (!data.chain) {
+      throw new functions.https.HttpsError('invalid-argument', 'Chain is required');
     }
 
     const response = await Moralis.Auth.requestMessage({
       ...params,
       network: 'evm',
-      address: EvmAddress.create(data.evmAddress),
-      chain: EvmChain.create(data.evmChain),
+      address: EvmAddress.create(data.address),
+      chain: EvmChain.create(data.chain),
     });
     return response.raw;
   }
 
   if (data.networkType === 'solana') {
-    if (!data.solAddress) {
-      throw new functions.https.HttpsError('invalid-argument', 'Solana address is required');
-    }
-    if (!data.solNetwork) {
+    if (!data.network) {
       throw new functions.https.HttpsError('invalid-argument', 'Solana network is required');
     }
 
     const response = await Moralis.Auth.requestMessage({
       ...params,
       network: 'solana',
-      address: SolAddress.create(data.solAddress),
-      solNetwork: SolNetwork.create(data.solNetwork),
+      address: SolAddress.create(data.address),
+      solNetwork: SolNetwork.create(data.network),
     });
     return response.raw;
   }
 
-  throw new functions.https.HttpsError('invalid-argument', `Not supported network: ${data.networkType}`);
+  throw new functions.https.HttpsError('invalid-argument', `Not supported network type: ${data.networkType}`);
 });
 
 // ~/ext-moralis-auth-issueToken
