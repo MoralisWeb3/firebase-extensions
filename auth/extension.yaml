@@ -121,7 +121,10 @@ params:
 
   - param: WEBSITE_URI
     label: Website URI
-    description: The website URI. It should contain a folder if present.
+    description: >-
+      The final website URI. It should contain a folder if present.
+      For testing purposes, you may enter: http://localhost, but we recommend to enter a URI where you will release your app.
+      This URI will be used in the authentication flow.
     type: string
     example: https://website.com/my-app
     required: true
