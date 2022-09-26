@@ -1,3 +1,7 @@
+## Version 0.1.2
+
+Better validation of an extension's parameter.
+
 ## Version 0.1.1
 
 Solana authentication support.
