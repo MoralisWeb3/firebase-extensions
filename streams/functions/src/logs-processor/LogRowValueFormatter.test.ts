@@ -10,6 +10,6 @@ describe('LogRowValueFormatter', () => {
   }
 
   test('string', 'test', 'test');
-  test('address', '0x351228872bd3fd72f64596623d0f5e8e8014f801', '0x351228872bd3fd72f64596623d0f5e8e8014f801');
+  test('address', '0x351228872BD3fd72f64596623d0f5e8e8014F801', '0x351228872bd3fd72f64596623d0f5e8e8014f801');
   test('uint256', BigNumber.from(0x100), '256');
 });

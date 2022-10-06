@@ -11,7 +11,7 @@
     "format": "prettier . \"**/*.+(js|ts|json)\" --write"
   },
   "engines": {
-    "node": "14"
+    "node": "^14 || ^16"
   },
   "author": "Moralis",
   "license": "MIT",

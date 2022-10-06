@@ -1,7 +1,7 @@
 import * as admin from 'firebase-admin';
 
-import { LogRow } from '../contract-processor/LogRowBuilder';
-import { LogRowUpdate } from '../contract-processor/LogsProcessor';
+import { LogRow } from '../logs-processor/LogRowBuilder';
+import { LogRowUpdate } from '../logs-processor/LogsProcessor';
 
 export class LogsWriter {
   public constructor(private readonly store: admin.firestore.Firestore) {}
@@ -26,6 +26,9 @@ export class LogsWriter {
       }
     }
 
-    await itemDoc.set(update.row);
+    await itemDoc.set({
+      ...update.row,
+      updatedAt: admin.firestore.FieldValue.serverTimestamp()
+    });
   }
 }

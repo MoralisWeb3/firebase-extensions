@@ -14,6 +14,9 @@ export class TxsWriter {
     const collection = this.store.collection(`moralis/txs/${update.tableName}`);
 
     const itemDoc = collection.doc(update.row.id);
-    itemDoc.set(update.row);
+    itemDoc.set({
+      ...update.row,
+      updatedAt: admin.firestore.FieldValue.serverTimestamp()
+    });
   }
 }
