@@ -33,7 +33,7 @@ export class TxRowBuilder {
       gasPrice: parseInt(tx.gasPrice as string, 10),
       nonce: parseInt(tx.nonce as string, 10),
       fromAddress: tx.fromAddress,
-      toAddress: tx.fromAddress,
+      toAddress: tx.toAddress,
       value: tx.value || '0',
       input: tx.input,
       type: parseInt(tx.type as string, 10),
