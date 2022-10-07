@@ -5,17 +5,17 @@ describe('LogRowId', () => {
 
   it('creates correct id', () => {
     const logIndex = '11';
-    const id1 = LogRowId.create(transactionHash, logIndex);
-    const id2 = LogRowId.create(transactionHash.toUpperCase(), logIndex);
-    const id3 = LogRowId.create(transactionHash.toLowerCase(), logIndex);
+    const id1 = LogRowId.create(0x1, transactionHash, logIndex);
+    const id2 = LogRowId.create(0x1, transactionHash.toUpperCase(), logIndex);
+    const id3 = LogRowId.create(0x1, transactionHash.toLowerCase(), logIndex);
 
-    const expectedId = '0xcd78e3e5816fbc14986c7828f939cc153c5aab90eeb8cb6e23572dce11dd6c4d';
+    const expectedId = '0xd41b67934bd263462e1721e5a2f04656254d78f442562013b69c9667b6f4cc91';
     expect(id1).toEqual(expectedId);
     expect(id2).toEqual(expectedId);
     expect(id3).toEqual(expectedId);
   });
 
   it('logs with different logIndex have different id', () => {
-    expect(LogRowId.create(transactionHash, '1')).not.toBe(LogRowId.create(transactionHash, '2'));
+    expect(LogRowId.create(0x512, transactionHash, '1')).not.toBe(LogRowId.create(0x512, transactionHash, '2'));
   });
 });

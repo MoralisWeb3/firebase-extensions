@@ -2,7 +2,10 @@ import { TxRowId } from './TxRowId';
 
 describe('TxRowId', () => {
   it('returns id', () => {
-    const id = TxRowId.create('0xbe0deb85f7c6a31c017d6ce442bb019614b292c5db1d389eb745beeee28e561c');
-    expect(id).toEqual('0x6060cb10b82aa0d480ead4c54b39b3e7d858def1b3443d6abea7a5faebdf28dc');
+    const id1 = TxRowId.create(1, '0xbe0deb85f7c6a31c017d6ce442bb019614b292c5db1d389eb745beeee28e561c');
+    expect(id1).toEqual('0x554b5817ff0c728a6f3b365ef1b90c821c17029155b32cbaa29f5f00245a8144');
+
+    const id16 = TxRowId.create(16, '0xbe0deb85f7c6a31c017d6ce442bb019614b292c5db1d389eb745beeee28e561c');
+    expect(id16).toEqual('0xb97e2cb8d3bcf46395fc1751eb0524a3bc6777e5735a6120cbe02ab8871a4965');
   });
 });

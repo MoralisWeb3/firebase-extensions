@@ -1,9 +1,9 @@
 import { ethers } from 'ethers';
 
 export class LogRowId {
-  public static create(transactionHash: string, logIndex: string): string {
+  public static create(chainId: number, transactionHash: string, logIndex: string): string {
     const safeTransactionHash = transactionHash.toLowerCase();
-    const rawId = ethers.utils.toUtf8Bytes(`${safeTransactionHash};${logIndex}`);
+    const rawId = ethers.utils.toUtf8Bytes(`${chainId};${safeTransactionHash};${logIndex}`);
     return ethers.utils.sha256(rawId);
   }
 }

@@ -30,11 +30,12 @@ describe('TxRowBuilder', () => {
       hash: '0x1af899d66c7847ba6d1faa4d9ca1b37e4f337232662a8e60163a6718a234d9ff',
       timestamp: '1664791547',
     };
-    const row = TxRowBuilder.build(tx, block, false);
+    const row = TxRowBuilder.build(tx, block, false, '0x100');
 
     expect(row).toBeDefined();
-    expect(row.id).toBe('0xcd270344f96e9a093efdd083c921f97e5df8e2a913f7b24874fa124e44c831f5');
+    expect(row.id).toBe('0xd5c8346479d45c9ddb2bceed5ba23e44b5f10676494542b7b494401f78c295d4');
     expect(row.hash).toBe('0x91e4046c7768132aa614c6e0d4773b8cd20cee1948b2508e570d3ce630415588');
+    expect(row.chainId).toBe(256);
     expect(row.transactionIndex).toBe(75);
     expect(row.gas).toBe(207128);
     expect(row.gasPrice).toBe(8652938136);

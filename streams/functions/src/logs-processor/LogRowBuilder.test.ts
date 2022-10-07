@@ -41,7 +41,7 @@ describe('LogRowBuilder', () => {
 
     const row = LogRowBuilder.build(log, parsedLog, block, true, '0x1');
 
-    expect(row.id).toBe('0xba5c3db984630468e5d25ae1f2c798a0b65ccfcec943e83f1c36833bc63a2022');
+    expect(row.id).toBe('0x16b85919120eab4e52fb2d23d71a389ce6fdbd57016600d24033c8d00e9bd5a9');
     expect(row.address).toBe('0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce');
     expect(row.blockHash).toBe('0x76f9e7f08bc0c4f0621fc12af6730352578a8f980a06baffda8615235574fc75');
     expect(row.blockNumber).toBe(15631019);

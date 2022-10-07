@@ -10,7 +10,7 @@ export class TxsProcessor {
     const updates: TxRowUpdate[] = [];
 
     for (const tx of batch.txs) {
-      const row = TxRowBuilder.build(tx, batch.block, batch.confirmed);
+      const row = TxRowBuilder.build(tx, batch.block, batch.confirmed, batch.chainId);
 
       updates.push({
         tableName: this.collectionNameBuilder.build(tx.tag),

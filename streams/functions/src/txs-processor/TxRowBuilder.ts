@@ -5,6 +5,7 @@ import { TxRowId } from './TxRowId';
 export interface TxRow {
   id: string;
   hash: string;
+  chainId: number;
   transactionIndex: number;
   gas: number;
   gasPrice: number;
@@ -24,10 +25,12 @@ export interface TxRow {
 }
 
 export class TxRowBuilder {
-  public static build(tx: Transaction, block: Block, confirmed: boolean): TxRow {
+  public static build(tx: Transaction, block: Block, confirmed: boolean, chainId: string): TxRow {
+    const chain = Number(chainId);
     return {
-      id: TxRowId.create(tx.hash),
+      id: TxRowId.create(chain, tx.hash),
       hash: tx.hash,
+      chainId: chain,
       transactionIndex: parseInt(tx.transactionIndex, 10),
       gas: parseInt(tx.gas as string, 10),
       gasPrice: parseInt(tx.gasPrice as string, 10),
