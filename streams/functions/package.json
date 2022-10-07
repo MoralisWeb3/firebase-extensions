@@ -16,7 +16,7 @@
   "author": "Moralis",
   "license": "MIT",
   "dependencies": {
-    "@moralisweb3/streams-typings": "^1.0.2",
+    "@moralisweb3/streams-typings": "^1.0.4",
     "ethers": "^5.7.1",
     "firebase-admin": "^10.0.2",
     "firebase-functions": "^3.23.0",

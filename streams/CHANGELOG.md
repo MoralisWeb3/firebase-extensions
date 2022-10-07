@@ -1,3 +1,7 @@
+## Version 0.1.2
+
+Update streams typings.
+
 ## Version 0.1.1
 
 Fixed the row builder for transactions.

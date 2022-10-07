@@ -1,6 +1,6 @@
 import { BigNumber } from 'ethers';
 
-import { LogParam } from './LogParamsParser';
+import { LogParam } from './LogParser';
 import { LogRowValue } from './LogRowBuilder';
 
 export class LogRowValueFormatter {

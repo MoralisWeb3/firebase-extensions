@@ -1,12 +1,13 @@
 import { Block, Log } from '@moralisweb3/streams-typings';
 
-import { LogParams } from './LogParamsParser';
+import { ParsedLog } from './LogParser';
 import { LogRowId } from './LogRowId';
 import { LogRowValueFormatter } from './LogRowValueFormatter';
 import { RowParamNameResolver } from './RowParamNameResolver';
 
 interface BaseLogRow {
   id: string;
+  name: string;
   logIndex: number;
   transactionHash: string;
   address: string;
@@ -14,6 +15,7 @@ interface BaseLogRow {
   blockTimestamp: number;
   blockNumber: number;
   confirmed: boolean;
+  chainId: number;
 }
 
 export interface LogRow extends BaseLogRow {
@@ -24,6 +26,7 @@ export type LogRowValue = string | number | boolean;
 
 const logRowParamNames: (keyof BaseLogRow)[] = [
   'id',
+  'name',
   'logIndex',
   'transactionHash',
   'address',
@@ -31,6 +34,7 @@ const logRowParamNames: (keyof BaseLogRow)[] = [
   'blockTimestamp',
   'blockNumber',
   'confirmed',
+  'chainId',
 ];
 
 const restrictedParamNames: string[] = [
@@ -40,14 +44,17 @@ const restrictedParamNames: string[] = [
   'uniqueId',
   'updatedAt',
   'createdAt',
+  'user',
+  'userId',
 ];
 
 export class LogRowBuilder {
-  public static build(log: Log, logParams: LogParams, block: Block, confirmed: boolean): LogRow {
+  public static build(log: Log, parsedLog: ParsedLog, block: Block, confirmed: boolean, chainId: string): LogRow {
     const nameResolver = new RowParamNameResolver(restrictedParamNames);
 
     const row: LogRow = {
       id: LogRowId.create(log.transactionHash, log.logIndex),
+      name: parsedLog.name,
       logIndex: parseInt(log.logIndex, 10),
       transactionHash: log.transactionHash,
       address: log.address,
@@ -55,9 +62,10 @@ export class LogRowBuilder {
       blockTimestamp: parseInt(block.timestamp, 10),
       blockNumber: parseInt(block.number, 10),
       confirmed,
+      chainId: Number(chainId),
     };
 
-    nameResolver.iterate(logParams, (safeParamName, paramValue) => {
+    nameResolver.iterate(parsedLog.params, (safeParamName, paramValue) => {
       row[safeParamName] = LogRowValueFormatter.format(paramValue);
     });
     return row;

@@ -1,5 +1,5 @@
 import { BigNumber } from 'ethers';
-import { LogParamValue } from './LogParamsParser';
+import { LogParamValue } from './LogParser';
 import { LogRowValueFormatter } from './LogRowValueFormatter';
 
 describe('LogRowValueFormatter', () => {

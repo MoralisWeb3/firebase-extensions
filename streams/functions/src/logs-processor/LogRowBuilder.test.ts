@@ -16,18 +16,21 @@ describe('LogRowBuilder', () => {
       streamType: 'contract',
       streamId: '6f37326a-e512-42bb-bcf0-36ae984da857',
     };
-    const logParams = {
-      from: {
-        value: '0x6D17CC023Df5156EFBC726946cE5d04fE484eF39',
-        type: 'address',
-      },
-      to: {
-        value: '0x34189c75Cbb13Bdb4F5953CDa6c3045CFcA84a9e',
-        type: 'address',
-      },
-      value: {
-        value: BigNumber.from('0x0edd1be4934b422c1c0000'),
-        type: 'uint256',
+    const parsedLog = {
+      name: 'Transfer',
+      params: {
+        from: {
+          value: '0x6D17CC023Df5156EFBC726946cE5d04fE484eF39',
+          type: 'address',
+        },
+        to: {
+          value: '0x34189c75Cbb13Bdb4F5953CDa6c3045CFcA84a9e',
+          type: 'address',
+        },
+        value: {
+          value: BigNumber.from('0x0edd1be4934b422c1c0000'),
+          type: 'uint256',
+        },
       },
     };
     const block = {
@@ -36,7 +39,7 @@ describe('LogRowBuilder', () => {
       timestamp: '1664358227',
     };
 
-    const row = LogRowBuilder.build(log, logParams, block, true);
+    const row = LogRowBuilder.build(log, parsedLog, block, true, '0x1');
 
     expect(row.id).toBe('0xba5c3db984630468e5d25ae1f2c798a0b65ccfcec943e83f1c36833bc63a2022');
     expect(row.address).toBe('0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce');
@@ -45,6 +48,8 @@ describe('LogRowBuilder', () => {
     expect(row.blockTimestamp).toBe(1664358227);
     expect(row.confirmed).toBe(true);
     expect(row.logIndex).toBe(56);
+    expect(row.name).toBe('Transfer');
+    expect(row.chainId).toBe(1);
     expect(row['from']).toBe('0x6d17cc023df5156efbc726946ce5d04fe484ef39');
     expect(row['to']).toBe('0x34189c75cbb13bdb4f5953cda6c3045cfca84a9e');
     expect(row['value']).toBe('17969119000000000000000000');
