@@ -31,6 +31,7 @@ export const webhook = functions.handler.https.onRequest(async (req, res) => {
     !!batch &&
     !!signature &&
     Moralis.Streams.verifySignature({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       body: batch as any,
       signature,
     });

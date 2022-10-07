@@ -27,13 +27,14 @@ export class LogParamsParser {
     let topicIndex = 1;
     let decodedDataIndex = 0;
 
-    for (let input of abi.inputs) {
-      let value: any;
+    for (const input of abi.inputs) {
+      let value: LogParamValue;
 
       if (input.indexed) {
-        const topicValue = (log as any)['topic' + topicIndex] as string;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const topicValue = (log as any)[`topic${topicIndex}`] as string;
         topicIndex++;
-        value = coder.decode([input.type], topicValue)[0];
+        [value] = coder.decode([input.type], topicValue);
       } else {
         value = decodedData[decodedDataIndex];
         decodedDataIndex++;

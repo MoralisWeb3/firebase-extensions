@@ -17,8 +17,10 @@ interface BaseLogRow {
 }
 
 export interface LogRow extends BaseLogRow {
-  [logParamName: string]: string | number | boolean;
+  [logParamName: string]: LogRowValue;
 }
+
+export type LogRowValue = string | number | boolean;
 
 const logRowParamNames: (keyof BaseLogRow)[] = [
   'id',

@@ -17,7 +17,7 @@ export class RowParamNameResolver {
   public resolve(name: string): string {
     if (this.isUsed(name)) {
       do {
-        name = '_' + name;
+        name = `_${name}`;
       } while (this.isUsed(name));
     }
 

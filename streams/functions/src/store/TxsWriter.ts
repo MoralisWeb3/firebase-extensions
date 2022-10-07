@@ -16,7 +16,7 @@ export class TxsWriter {
     const itemDoc = collection.doc(update.row.id);
     itemDoc.set({
       ...update.row,
-      updatedAt: admin.firestore.FieldValue.serverTimestamp()
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
     });
   }
 }

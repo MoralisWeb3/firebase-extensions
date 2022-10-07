@@ -28,7 +28,7 @@ export class LogsWriter {
 
     await itemDoc.set({
       ...update.row,
-      updatedAt: admin.firestore.FieldValue.serverTimestamp()
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
     });
   }
 }

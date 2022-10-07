@@ -10,7 +10,7 @@ export class LogsProcessor {
   public process(batch: IWebhook): LogRowUpdate[] {
     const updates: LogRowUpdate[] = [];
 
-    for (let log of batch.logs) {
+    for (const log of batch.logs) {
       const abi = batch.abis[log.streamId];
       if (!abi) {
         // Transaction batches don't contain ABIs.

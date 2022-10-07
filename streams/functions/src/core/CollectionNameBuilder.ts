@@ -17,7 +17,7 @@ export class CollectionNameBuilder {
 
   private process(tag: string): string {
     const parts = tag
-      .split(/[^a-zA-Z0-9\_]/)
+      .split(/[^a-zA-Z0-9_]/)
       .filter((p) => !!p)
       .map((p) => {
         return p.substring(0, 1).toUpperCase() + p.substring(1).toLowerCase();

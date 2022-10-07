@@ -2,7 +2,7 @@ name: moralis-streams
 version: 0.1.0
 specVersion: v1beta
 
-displayName: Listen Blockchain with Moralis Streams
+displayName: Listen Blockchain by Moralis Streams
 
 description: >-
   Synchronize Blockchain state with your app easily.
@@ -12,6 +12,10 @@ license: Apache-2.0
 author:
   authorName: Moralis
   url: https://moralis.io
+
+contributors:
+  - authorName: Bart Tadych
+    url: https://github.com/b4rtaz
 
 sourceUrl: https://github.com/MoralisWeb3/firebase-extensions/tree/main/auth
 

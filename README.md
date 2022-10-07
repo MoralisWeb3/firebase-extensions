@@ -5,6 +5,7 @@ This repository contains all Moralis extensions for the Firebase.
 ### 🔌 Extensions
 
 * [moralis-auth](./auth/)
+* [moralis-streams](./streams/)
 
 ### 📕 Tutorials
 

@@ -3,7 +3,7 @@ import { LogParamValue } from './LogParamsParser';
 import { LogRowValueFormatter } from './LogRowValueFormatter';
 
 describe('LogRowValueFormatter', () => {
-  function test(type: string, value: LogParamValue, expectedValue: any) {
+  function test(type: string, value: LogParamValue, expectedValue: unknown) {
     it(`formats ${type} value to ${expectedValue}`, () => {
       expect(LogRowValueFormatter.format({ type, value })).toBe(expectedValue);
     });
