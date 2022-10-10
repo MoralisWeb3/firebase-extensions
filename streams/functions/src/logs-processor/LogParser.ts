@@ -23,11 +23,8 @@ export class LogParser {
   }
 
   public read(log: Log): ParsedLog {
-    const topics = Object.keys(log)
-      .filter((name) => name.startsWith('topic'))
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      .map((name) => (log as any)[name] as string)
-      .filter((value) => value !== null);
+    // Solidity supports max 3 topics. https://docs.soliditylang.org/en/latest/contracts.html#events
+    const topics = [log.topic0, log.topic1, log.topic2, log.topic3].filter((t) => t !== null) as string[];
 
     const result = this.abiInterface.parseLog({
       data: log.data,
