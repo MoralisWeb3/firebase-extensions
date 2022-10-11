@@ -1,4 +1,4 @@
-### Firestore Security Roles
+### Firestore Security Rules
 
 Add **MANDATORY** security rules to the Firestore configuration (`firestore.rules`)
 
