@@ -1,5 +1,5 @@
 name: moralis-streams
-version: 0.1.4
+version: 0.1.5
 specVersion: v1beta
 
 displayName: Listen Blockchain by Moralis Streams
@@ -17,7 +17,7 @@ contributors:
   - authorName: Bart Tadych
     url: https://github.com/b4rtaz
 
-sourceUrl: https://github.com/MoralisWeb3/firebase-extensions/tree/main/auth
+sourceUrl: https://github.com/MoralisWeb3/firebase-extensions/tree/main/streams
 
 billingRequired: true
 

@@ -1,3 +1,7 @@
+## Version 0.1.5
+
+Set correct repository URL to extension.yaml.
+
 ## Version 0.1.4
 
 Fixed the transactions writer.
