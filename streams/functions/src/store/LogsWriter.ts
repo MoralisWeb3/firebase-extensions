@@ -20,7 +20,7 @@ export class LogsWriter {
       if (item.exists) {
         const log = item.data() as LogRow;
         if (log.confirmed) {
-          // We don't update a confirmed record by not confirmed record.
+          // We don't update a confirmed item with a non confirmed item.
           return;
         }
       }

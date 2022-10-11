@@ -1,3 +1,7 @@
+## Version 0.1.4
+
+Fixed the transactions writer.
+
 ## Version 0.1.3
 
 Add the chainId column to the transaction row.

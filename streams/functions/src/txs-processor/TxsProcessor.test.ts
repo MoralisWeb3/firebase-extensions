@@ -122,6 +122,6 @@ describe('TxsProcessor', () => {
     const updates = processor.process(batch);
 
     expect(updates.length).toBe(4);
-    expect(updates[0].tableName).toBe('Transaction');
+    expect(updates[0].collectionName).toBe('Transaction');
   });
 });

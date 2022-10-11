@@ -13,7 +13,7 @@ export class TxsProcessor {
       const row = TxRowBuilder.build(tx, batch.block, batch.confirmed, batch.chainId);
 
       updates.push({
-        tableName: this.collectionNameBuilder.build(tx.tag),
+        collectionName: this.collectionNameBuilder.build(tx.tag),
         row,
       });
     }
@@ -23,6 +23,6 @@ export class TxsProcessor {
 }
 
 export interface TxRowUpdate {
-  tableName: string;
+  collectionName: string;
   row: TxRow;
 }
