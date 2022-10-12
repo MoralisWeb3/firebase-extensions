@@ -9,7 +9,8 @@
     "lint": "eslint --ext .js,.ts src",
     "test": "jest",
     "test:watch": "jest --watch",
-    "format": "prettier --write \"src/**/*.+(js|ts|json)\""
+    "format": "prettier --write \"src/**/*.+(js|ts|json)\"",
+    "format:check": "prettier --check \"src/**/*.+(js|ts|json)\""
   },
   "engines": {
     "node": "^14 || ^16"
