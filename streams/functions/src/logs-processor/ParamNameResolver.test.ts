@@ -1,8 +1,8 @@
-import { RowParamNameResolver } from './RowParamNameResolver';
+import { ParamNameResolver } from './ParamNameResolver';
 
-describe('RowParamNameResolver', () => {
+describe('ParamNameResolver', () => {
   it('resolves correctly', () => {
-    const resolver = new RowParamNameResolver(['alfa', 'beta']);
+    const resolver = new ParamNameResolver(['alfa', 'beta']);
 
     expect(resolver.resolve('foo')).toEqual('foo');
     expect(resolver.resolve('bar')).toEqual('bar');

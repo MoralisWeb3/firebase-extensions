@@ -1,6 +1,6 @@
 import { BigNumber } from 'ethers';
 
-import { AbiItem } from '@moralisweb3/streams-typings';
+import { AbiItem, Log } from '@moralisweb3/streams-typings';
 
 import { LogParam, LogParser } from './LogParser';
 
@@ -11,7 +11,7 @@ describe('LogParser', () => {
   }
 
   it('reads Transfer event correctly', () => {
-    const log = {
+    const log: Log = {
       logIndex: '1',
       transactionHash: '0x13330587c90eb5efe8cd49a1da7314660d51cc0de35b97b6d423584459a5a643',
       address: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
@@ -20,8 +20,6 @@ describe('LogParser', () => {
       topic1: '0x000000000000000000000000beefbabeea323f07c59926295205d3b7a17e8638',
       topic2: '0x00000000000000000000000088e6a0c2ddd26feeb64f039a2c41296fcb3f5640',
       topic3: null,
-      tag: 'ERC20 Transfer',
-      streamId: 'ba3b3c52-3dd3-4eb7-a2b7-4b61d3439c5e',
     };
     const abiItems: AbiItem[] = [
       {
@@ -87,7 +85,7 @@ describe('LogParser', () => {
   });
 
   it('reads Swap event correctly', () => {
-    const log = {
+    const log: Log = {
       logIndex: '242',
       transactionHash: '0xeaad25e6cc05765d8e8a4358aee9593f578495b22890fcc10000a0ea4f37c444',
       address: '0xed92bfe08de542bbb40fdbe0a27ca66313c0c457',
@@ -96,9 +94,6 @@ describe('LogParser', () => {
       topic1: '0x000000000000000000000000def1c0ded9bec7f1a1670819833240f027b25eff',
       topic2: '0x000000000000000000000000def1c0ded9bec7f1a1670819833240f027b25eff',
       topic3: null,
-      tag: 'Sushi Swap',
-      streamType: 'contract',
-      streamId: 'bc9a9ce6-32b3-4039-9aee-c2b0d79afa34',
     };
     const abiItems: AbiItem[] = [
       {
@@ -164,7 +159,7 @@ describe('LogParser', () => {
   });
 
   it('reads log with string argument correctly', () => {
-    const log = {
+    const log: Log = {
       logIndex: '111',
       transactionHash: '0x7306fc7e0f7d88e791219464acf1aae0d18573d8b11f03e836f51460bb5f2ed9',
       address: '0x283af0b28c62c092c9727f1ee09c02ca627eb7f5',
@@ -173,8 +168,6 @@ describe('LogParser', () => {
       topic1: '0xe8ceaa0b6368653b230114926c9cb015f1dafa62a3f7ac854a2a246accf2061c',
       topic2: '0x000000000000000000000000909189c920e1c4c3bb4d29f3c6ab63030219a965',
       topic3: null,
-      tag: 'registra',
-      streamId: '5dbf77ad-e014-49cb-9dad-6c86565b5381',
     };
     const abiItems: AbiItem[] = [
       {

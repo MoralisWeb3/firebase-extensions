@@ -1,8 +1,8 @@
 import { Block, Transaction } from '@moralisweb3/streams-typings';
 
-import { TxRowId } from './TxRowId';
+import { TxDocumentId } from './TxDocumentId';
 
-export interface TxRow {
+export interface TxDocument {
   id: string;
   hash: string;
   chainId: number;
@@ -24,11 +24,11 @@ export interface TxRow {
   confirmed: boolean;
 }
 
-export class TxRowBuilder {
-  public static build(tx: Transaction, block: Block, confirmed: boolean, chainId: string): TxRow {
+export class TxDocumentBuilder {
+  public static build(tx: Transaction, block: Block, confirmed: boolean, chainId: string): TxDocument {
     const chain = Number(chainId);
     return {
-      id: TxRowId.create(chain, tx.hash),
+      id: TxDocumentId.create(chain, tx.hash),
       hash: tx.hash,
       chainId: chain,
       transactionIndex: parseInt(tx.transactionIndex, 10),

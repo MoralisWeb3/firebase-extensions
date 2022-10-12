@@ -1,6 +1,6 @@
 import { ethers } from 'ethers';
 
-export class TxRowId {
+export class TxDocumentId {
   public static create(chainId: number, transactionHash: string): string {
     const safeTransactionHash = transactionHash.toLowerCase();
     const rawId = ethers.utils.toUtf8Bytes(`${chainId};${safeTransactionHash}`);

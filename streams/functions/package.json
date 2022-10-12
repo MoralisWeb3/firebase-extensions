@@ -1,6 +1,6 @@
 {
   "name": "moralis-streams-firebase-extension",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Listen Blockchain with Moralis Streams",
   "main": "lib/index.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "build": "tsc",
     "lint": "eslint --ext .js,.ts src",
     "test": "jest --watch",
-    "format": "prettier . \"**/*.+(js|ts|json)\" --write"
+    "format": "prettier --write \"src/**/*.+(js|ts|json)\""
   },
   "engines": {
     "node": "^14 || ^16"
@@ -16,7 +16,7 @@
   "author": "Moralis",
   "license": "MIT",
   "dependencies": {
-    "@moralisweb3/streams-typings": "^1.0.4",
+    "@moralisweb3/streams-typings": "^1.0.5",
     "ethers": "^5.7.1",
     "firebase-admin": "^10.0.2",
     "firebase-functions": "^3.23.0",

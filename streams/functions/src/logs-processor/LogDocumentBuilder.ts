@@ -1,11 +1,11 @@
 import { Block, Log } from '@moralisweb3/streams-typings';
 
 import { ParsedLog } from './LogParser';
-import { LogRowId } from './LogRowId';
-import { LogRowValueFormatter } from './LogRowValueFormatter';
-import { RowParamNameResolver } from './RowParamNameResolver';
+import { LogDocumentId } from './LogDocumentId';
+import { LogDocumentValueFormatter } from './LogDocumentValueFormatter';
+import { ParamNameResolver } from './ParamNameResolver';
 
-interface BaseLogRow {
+interface BaseLogDocument {
   id: string;
   name: string;
   logIndex: number;
@@ -18,13 +18,13 @@ interface BaseLogRow {
   chainId: number;
 }
 
-export interface LogRow extends BaseLogRow {
-  [logParamName: string]: LogRowValue;
+export interface LogDocument extends BaseLogDocument {
+  [paramName: string]: LogDocumentValue;
 }
 
-export type LogRowValue = string | number | boolean;
+export type LogDocumentValue = string | number | boolean;
 
-const logRowParamNames: (keyof BaseLogRow)[] = [
+const paramNames: (keyof BaseLogDocument)[] = [
   'id',
   'name',
   'logIndex',
@@ -38,7 +38,7 @@ const logRowParamNames: (keyof BaseLogRow)[] = [
 ];
 
 const restrictedParamNames: string[] = [
-  ...logRowParamNames,
+  ...paramNames,
   // Some extra names
   '_id',
   'uniqueId',
@@ -48,13 +48,13 @@ const restrictedParamNames: string[] = [
   'userId',
 ];
 
-export class LogRowBuilder {
-  public static build(log: Log, parsedLog: ParsedLog, block: Block, confirmed: boolean, chainId: string): LogRow {
-    const nameResolver = new RowParamNameResolver(restrictedParamNames);
+export class LogDocumentBuilder {
+  public static build(log: Log, parsedLog: ParsedLog, block: Block, confirmed: boolean, chainId: string): LogDocument {
+    const nameResolver = new ParamNameResolver(restrictedParamNames);
     const chain = Number(chainId);
 
-    const row: LogRow = {
-      id: LogRowId.create(chain, log.transactionHash, log.logIndex),
+    const document: LogDocument = {
+      id: LogDocumentId.create(chain, log.transactionHash, log.logIndex),
       name: parsedLog.name,
       logIndex: parseInt(log.logIndex, 10),
       transactionHash: log.transactionHash,
@@ -67,8 +67,8 @@ export class LogRowBuilder {
     };
 
     nameResolver.iterate(parsedLog.params, (safeParamName, paramValue) => {
-      row[safeParamName] = LogRowValueFormatter.format(paramValue);
+      document[safeParamName] = LogDocumentValueFormatter.format(paramValue);
     });
-    return row;
+    return document;
   }
 }

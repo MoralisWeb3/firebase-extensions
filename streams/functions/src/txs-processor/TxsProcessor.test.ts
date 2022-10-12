@@ -4,7 +4,7 @@ import { TxsProcessor } from './TxsProcessor';
 const batch: IWebhook = {
   confirmed: false,
   chainId: '0x1',
-  abis: {},
+  abi: [],
   retries: 0,
   block: {
     number: '15696081',
@@ -33,8 +33,6 @@ const batch: IWebhook = {
       receiptContractAddress: null,
       receiptRoot: null,
       receiptStatus: '1',
-      tag: 'Transaction',
-      streamId: 'd945acd3-25a9-451e-8ea2-c809ff166ae9',
     },
     {
       hash: '0x016f82df5bb05188fe00e5e9b11b68a830898b4a5403671ae79fd049f19483a6',
@@ -56,8 +54,6 @@ const batch: IWebhook = {
       receiptContractAddress: null,
       receiptRoot: null,
       receiptStatus: '1',
-      tag: 'Transaction',
-      streamId: 'd945acd3-25a9-451e-8ea2-c809ff166ae9',
     },
     {
       hash: '0xf5db9667a130cefed66c2617ef6e36bbebeec22fb5dc489188dd6d630eae520d',
@@ -78,8 +74,6 @@ const batch: IWebhook = {
       receiptContractAddress: null,
       receiptRoot: null,
       receiptStatus: '1',
-      tag: 'Transaction',
-      streamId: 'd945acd3-25a9-451e-8ea2-c809ff166ae9',
     },
     {
       hash: '0x849572d6a1cad43061894e38b60b410108e7beb809358200befc75668c7278d5',
@@ -101,8 +95,6 @@ const batch: IWebhook = {
       receiptContractAddress: null,
       receiptRoot: null,
       receiptStatus: '1',
-      tag: 'Transaction',
-      streamId: 'd945acd3-25a9-451e-8ea2-c809ff166ae9',
     },
   ],
   txsInternal: [],
@@ -113,6 +105,8 @@ const batch: IWebhook = {
     ERC721: [],
   },
   nftTransfers: [],
+  tag: 'Transaction',
+  streamId: 'ba3b3c52-3dd3-4eb7-a2b7-4b61d3439c5e',
 };
 
 describe('TxsProcessor', () => {

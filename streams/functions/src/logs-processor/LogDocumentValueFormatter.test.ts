@@ -1,11 +1,11 @@
 import { BigNumber } from 'ethers';
 import { LogParamValue } from './LogParser';
-import { LogRowValueFormatter } from './LogRowValueFormatter';
+import { LogDocumentValueFormatter } from './LogDocumentValueFormatter';
 
-describe('LogRowValueFormatter', () => {
+describe('LogDocumentValueFormatter', () => {
   function test(type: string, value: LogParamValue, expectedValue: unknown) {
     it(`formats ${type} value to ${expectedValue}`, () => {
-      expect(LogRowValueFormatter.format({ type, value })).toBe(expectedValue);
+      expect(LogDocumentValueFormatter.format({ type, value })).toBe(expectedValue);
     });
   }
 

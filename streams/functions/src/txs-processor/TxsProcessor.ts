@@ -1,20 +1,20 @@
 import { IWebhook } from '@moralisweb3/streams-typings';
 
 import { CollectionNameBuilder } from '../core/CollectionNameBuilder';
-import { TxRow, TxRowBuilder } from './TxRowBuilder';
+import { TxDocument, TxDocumentBuilder } from './TxDocumentBuilder';
 
 export class TxsProcessor {
   private readonly collectionNameBuilder = new CollectionNameBuilder();
 
-  public process(batch: IWebhook): TxRowUpdate[] {
-    const updates: TxRowUpdate[] = [];
+  public process(batch: IWebhook): TxDocumentUpdate[] {
+    const updates: TxDocumentUpdate[] = [];
 
     for (const tx of batch.txs) {
-      const row = TxRowBuilder.build(tx, batch.block, batch.confirmed, batch.chainId);
+      const document = TxDocumentBuilder.build(tx, batch.block, batch.confirmed, batch.chainId);
 
       updates.push({
-        collectionName: this.collectionNameBuilder.build(tx.tag),
-        row,
+        collectionName: this.collectionNameBuilder.build(batch.tag),
+        document,
       });
     }
 
@@ -22,7 +22,7 @@ export class TxsProcessor {
   }
 }
 
-export interface TxRowUpdate {
+export interface TxDocumentUpdate {
   collectionName: string;
-  row: TxRow;
+  document: TxDocument;
 }

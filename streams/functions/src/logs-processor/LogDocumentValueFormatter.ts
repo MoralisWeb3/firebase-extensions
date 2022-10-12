@@ -1,10 +1,10 @@
 import { BigNumber } from 'ethers';
 
 import { LogParam } from './LogParser';
-import { LogRowValue } from './LogRowBuilder';
+import { LogDocumentValue } from './LogDocumentBuilder';
 
-export class LogRowValueFormatter {
-  public static format(param: LogParam): LogRowValue {
+export class LogDocumentValueFormatter {
+  public static format(param: LogParam): LogDocumentValue {
     switch (param.type) {
       case 'string':
         return param.value as string;

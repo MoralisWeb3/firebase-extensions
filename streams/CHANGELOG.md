@@ -1,3 +1,7 @@
+## Version 0.1.6
+
+Update streams typings.
+
 ## Version 0.1.5
 
 Set correct repository URL to extension.yaml.
@@ -8,7 +12,7 @@ Fixed the transactions writer.
 
 ## Version 0.1.3
 
-Add the chainId column to the transaction row.
+Add the chainId column to the transaction document.
 
 ## Version 0.1.2
 

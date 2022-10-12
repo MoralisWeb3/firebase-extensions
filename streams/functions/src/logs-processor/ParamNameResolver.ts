@@ -1,4 +1,4 @@
-export class RowParamNameResolver {
+export class ParamNameResolver {
   private readonly usedNames: string[] = [];
 
   public constructor(private readonly restrictedNames: string[]) {}
