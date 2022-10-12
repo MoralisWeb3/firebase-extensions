@@ -1,0 +1,28 @@
+name: CI
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+jobs:
+  setup:
+    name: Setup
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [16]
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Setup Node 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: Run build.sh
+        run: |
+          chmod +x ./.github/workflows/build.sh
+          ./.github/workflows/build.sh
+        shell: bash
