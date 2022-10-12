@@ -24,4 +24,5 @@ jobs:
       - name: Prepare build.sh
         run: chmod +x $PWD/.github/workflows/build.sh
       - name: Run build.sh
+        working-directory: .
         run: $PWD/.github/workflows/build.sh

@@ -1,16 +1,15 @@
 #!/bin/sh
 set -e
 
-SCRIPT_DIR=$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)
-ROOT_DIR=$SCRIPT_DIR/../..
-
 echo "auth"
-cd $ROOT_DIR/auth/functions
+cd auth/functions
 npm install --loglevel error --no-progress --ignore-scripts
 npm run build
+cd ../..
 
 echo "streams"
-cd $ROOT_DIR/streams/functions
+cd streams/functions
 npm install --loglevel error --no-progress --ignore-scripts
 npm run build
 npm run test
+cd ../..
