@@ -21,8 +21,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16'
+      - name: Prepare build.sh
+        run: chmod +x $PWD/.github/workflows/build.sh
       - name: Run build.sh
-        run: |
-          chmod +x ./.github/workflows/build.sh
-          ./.github/workflows/build.sh
-        shell: bash
+        run: $PWD/.github/workflows/build.sh
