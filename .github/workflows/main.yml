@@ -7,8 +7,8 @@ on:
     branches:
       - main
 jobs:
-  setup:
-    name: Setup
+  buildAndTest:
+    name: Build and Test
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
