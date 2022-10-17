@@ -1,4 +1,5 @@
 import { IWebhook } from '@moralisweb3/streams-typings';
+import { CollectionNameBuilder } from '../core/CollectionNameBuilder';
 
 import { LogsProcessor } from './LogsProcessor';
 
@@ -361,7 +362,7 @@ const batch: IWebhook = {
 };
 
 describe('LogsProcessor', () => {
-  const processor = new LogsProcessor();
+  const processor = new LogsProcessor(new CollectionNameBuilder());
 
   it('processes correctly', () => {
     const updates = processor.process(batch);

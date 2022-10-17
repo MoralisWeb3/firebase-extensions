@@ -1,8 +1,9 @@
 import { Block, Transaction } from '@moralisweb3/streams-typings';
+import { Document } from '../storage/Update';
 
 import { TxDocumentId } from './TxDocumentId';
 
-export interface TxDocument {
+export interface TxDocument extends Document {
   id: string;
   hash: string;
   chainId: number;

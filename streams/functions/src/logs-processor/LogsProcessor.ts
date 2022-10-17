@@ -3,9 +3,10 @@ import { IWebhook } from '@moralisweb3/streams-typings';
 import { CollectionNameBuilder } from '../core/CollectionNameBuilder';
 import { LogParser } from './LogParser';
 import { LogDocument, LogDocumentBuilder } from './LogDocumentBuilder';
+import { Update } from '../storage/Update';
 
 export class LogsProcessor {
-  private readonly collectionNameBuilder = new CollectionNameBuilder();
+  public constructor(private readonly collectionNameBuilder: CollectionNameBuilder) {}
 
   public process(batch: IWebhook): LogDocumentUpdate[] {
     const updates: LogDocumentUpdate[] = [];
@@ -30,7 +31,7 @@ export class LogsProcessor {
   }
 }
 
-export interface LogDocumentUpdate {
+export interface LogDocumentUpdate extends Update<LogDocument> {
   collectionName: string;
   document: LogDocument;
 }

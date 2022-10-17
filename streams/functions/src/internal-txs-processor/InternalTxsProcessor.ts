@@ -1,17 +1,16 @@
 import { IWebhook } from '@moralisweb3/streams-typings';
-
 import { CollectionNameBuilder } from '../core/CollectionNameBuilder';
 import { Update } from '../storage/Update';
-import { TxDocument, TxDocumentBuilder } from './TxDocumentBuilder';
+import { InternalTxDocument, InternalTxDocumentBuilder } from './InternalTxDocumentBuilder';
 
-export class TxsProcessor {
+export class InternalTxsProcessor {
   public constructor(private readonly collectionNameBuilder: CollectionNameBuilder) {}
 
   public process(batch: IWebhook): TxDocumentUpdate[] {
     const updates: TxDocumentUpdate[] = [];
 
-    for (const tx of batch.txs) {
-      const document = TxDocumentBuilder.build(tx, batch.block, batch.confirmed, batch.chainId);
+    for (const internalTx of batch.txsInternal) {
+      const document = InternalTxDocumentBuilder.build(internalTx, batch.block, batch.confirmed, batch.chainId);
 
       updates.push({
         collectionName: this.collectionNameBuilder.build(batch.tag),
@@ -23,7 +22,7 @@ export class TxsProcessor {
   }
 }
 
-export interface TxDocumentUpdate extends Update<TxDocument> {
+export interface TxDocumentUpdate extends Update<InternalTxDocument> {
   collectionName: string;
-  document: TxDocument;
+  document: InternalTxDocument;
 }

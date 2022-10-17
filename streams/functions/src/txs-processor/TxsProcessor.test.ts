@@ -1,4 +1,5 @@
 import { IWebhook } from '@moralisweb3/streams-typings';
+import { CollectionNameBuilder } from '../core/CollectionNameBuilder';
 import { TxsProcessor } from './TxsProcessor';
 
 const batch: IWebhook = {
@@ -111,7 +112,7 @@ const batch: IWebhook = {
 
 describe('TxsProcessor', () => {
   it('builds correctly', () => {
-    const processor = new TxsProcessor();
+    const processor = new TxsProcessor(new CollectionNameBuilder());
 
     const updates = processor.process(batch);
 

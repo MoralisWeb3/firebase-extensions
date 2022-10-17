@@ -1,3 +1,7 @@
+## Version 0.1.7
+
+Support internal transactions.
+
 ## Version 0.1.6
 
 Update streams typings.

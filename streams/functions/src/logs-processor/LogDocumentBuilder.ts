@@ -4,6 +4,7 @@ import { ParsedLog } from './LogParser';
 import { LogDocumentId } from './LogDocumentId';
 import { LogDocumentValueFormatter } from './LogDocumentValueFormatter';
 import { ParamNameResolver } from './ParamNameResolver';
+import { Document } from '../storage/Update';
 
 interface BaseLogDocument {
   id: string;
@@ -18,7 +19,7 @@ interface BaseLogDocument {
   chainId: number;
 }
 
-export interface LogDocument extends BaseLogDocument {
+export interface LogDocument extends BaseLogDocument, Document {
   [paramName: string]: LogDocumentValue;
 }
 

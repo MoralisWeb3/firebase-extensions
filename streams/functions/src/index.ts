@@ -6,22 +6,24 @@ import { IWebhook } from '@moralisweb3/streams-typings';
 
 import { config } from './config';
 import { LogsProcessor } from './logs-processor/LogsProcessor';
-import { LogsWriter } from './store/LogsWriter';
-import { TxsWriter } from './store/TxsWriter';
+import { FirestoreWriter } from './storage/FirestoreWriter';
 import { TxsProcessor } from './txs-processor/TxsProcessor';
+import { CollectionNameBuilder } from './core/CollectionNameBuilder';
+import { InternalTxsProcessor } from './internal-txs-processor/InternalTxsProcessor';
 
 const app = admin.initializeApp();
-const db = app.firestore();
+const firestore = app.firestore();
 
 Moralis.start({
   apiKey: config.moralisApiKey,
 });
 
-const logsProcessor = new LogsProcessor();
-const txsProcessor = new TxsProcessor();
+const collectionNameBuilder = new CollectionNameBuilder();
+const logsProcessor = new LogsProcessor(collectionNameBuilder);
+const txsProcessor = new TxsProcessor(collectionNameBuilder);
+const internalTxProcessor = new InternalTxsProcessor(collectionNameBuilder);
 
-const logsWriter = new LogsWriter(db);
-const txsWriter = new TxsWriter(db);
+const firestoreWriter = new FirestoreWriter(firestore);
 
 export const webhook = functions.handler.https.onRequest(async (req, res) => {
   const batch = req.body as IWebhook;
@@ -42,8 +44,13 @@ export const webhook = functions.handler.https.onRequest(async (req, res) => {
 
   const logUpdates = logsProcessor.process(batch);
   const txUpdates = txsProcessor.process(batch);
+  const internalTxUpdates = internalTxProcessor.process(batch);
 
-  const transactions = [...logsWriter.writeMany(logUpdates), ...txsWriter.writeMany(txUpdates)];
+  const transactions = [
+    ...firestoreWriter.writeMany('moralis/events', logUpdates),
+    ...firestoreWriter.writeMany('moralis/txs', txUpdates),
+    ...firestoreWriter.writeMany('moralis/internalTxs', internalTxUpdates),
+  ];
 
   await Promise.all(transactions);
   res.status(200).send('OK');
