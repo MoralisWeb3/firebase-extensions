@@ -1,3 +1,7 @@
+## Version 0.1.8
+
+Update Firestore rules to more generic in the POSTINSTALL.md file.
+
 ## Version 0.1.7
 
 Support internal transactions.
