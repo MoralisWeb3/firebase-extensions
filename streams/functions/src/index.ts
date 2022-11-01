@@ -18,7 +18,7 @@ const firestore = app.firestore();
 Moralis.start({
   apiKey: config.moralisApiKey,
 });
-Moralis.Core.config.set(CoreConfig.product, 'firebase-auth');
+Moralis.Core.config.set(CoreConfig.product, 'firebase-streams');
 
 const collectionNameBuilder = new CollectionNameBuilder();
 const logsProcessor = new LogsProcessor(collectionNameBuilder);
