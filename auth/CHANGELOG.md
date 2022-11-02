@@ -1,3 +1,7 @@
+## Version 0.1.4
+
+Update dependencies.
+
 ## Version 0.1.3
 
 Configure product name.
