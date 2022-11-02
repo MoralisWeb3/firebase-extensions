@@ -1,6 +1,6 @@
 {
   "name": "moralis-streams-firebase-extension",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Listen Blockchain with Moralis Streams",
   "main": "lib/index.js",
   "scripts": {

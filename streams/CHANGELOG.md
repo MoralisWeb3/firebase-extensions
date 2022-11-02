@@ -1,3 +1,7 @@
+## Version 0.1.9
+
+Configure product name.
+
 ## Version 0.1.8
 
 Update Firestore rules to more generic in the POSTINSTALL.md file.
