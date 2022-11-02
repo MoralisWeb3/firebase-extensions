@@ -1,3 +1,7 @@
+## Version 0.1.3
+
+Configure product name.
+
 ## Version 0.1.2
 
 Better validation of an extension's parameter.
