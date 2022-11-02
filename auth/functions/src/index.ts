@@ -2,6 +2,7 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import { cert } from 'firebase-admin/app';
 import Moralis from 'moralis';
+import { CoreConfig } from 'moralis/core';
 import { EvmAddress, EvmChain } from '@moralisweb3/evm-utils';
 import { SolAddress, SolNetwork } from '@moralisweb3/sol-utils';
 
@@ -11,6 +12,7 @@ import { userExists } from './userExists';
 Moralis.start({
   apiKey: config.moralisApiKey,
 });
+Moralis.Core.config.set(CoreConfig.product, 'firebase-auth');
 
 const app = admin.initializeApp({
   credential: cert({
@@ -78,7 +80,7 @@ export const requestMessage = functions.handler.https.onCall(async (data: Reques
 
     const response = await Moralis.Auth.requestMessage({
       ...params,
-      network: 'solana',
+      networkType: 'solana',
       address: SolAddress.create(data.address),
       solNetwork: SolNetwork.create(data.network),
     });
@@ -123,7 +125,7 @@ export const issueToken = functions.handler.https.onCall(async (data: IssueToken
   else if (data.networkType === 'solana') {
     const response = await Moralis.Auth.verify({
       ...params,
-      network: 'solana',
+      networkType: 'solana',
     });
     uid = response.result.profileId;
     address = response.result.address.address;

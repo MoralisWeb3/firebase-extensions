@@ -1,6 +1,7 @@
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 import Moralis from 'moralis';
+import { CoreConfig } from 'moralis/core';
 
 import { IWebhook } from '@moralisweb3/streams-typings';
 
@@ -17,6 +18,7 @@ const firestore = app.firestore();
 Moralis.start({
   apiKey: config.moralisApiKey,
 });
+Moralis.Core.config.set(CoreConfig.product, 'firebase-streams');
 
 const collectionNameBuilder = new CollectionNameBuilder();
 const logsProcessor = new LogsProcessor(collectionNameBuilder);
