@@ -1,0 +1,112 @@
+name: moralis-api
+version: 0.1.1
+specVersion: v1beta
+
+displayName: Moralis Web3 Api for Front-End Applications
+
+description: >-
+  Call Moralis Api from the front-end application easily.
+
+license: Apache-2.0
+
+author:
+  authorName: Moralis
+  url: https://moralis.io
+
+contributors:
+  - authorName: Bart Tadych
+    url: https://github.com/b4rtaz
+
+sourceUrl: https://github.com/MoralisWeb3/firebase-extensions/tree/main/streams
+
+billingRequired: true
+
+roles:
+  - role: datastore.user
+    reason: Allows this extension to access Cloud Firestore to write data.
+
+resources:
+  - name: webhook
+    type: firebaseextensions.v1beta.function
+    description: The webhook for the Moralis Streams service.
+    properties:
+      location: ${LOCATION}
+      httpsTrigger: {}
+      runtime: "nodejs14"
+
+params:
+  - param: LOCATION
+    label: Cloud Functions location
+    description: >-
+      Where do you want to deploy the functions created for this extension?
+      For help selecting a location, refer to the [location selection
+      guide](https://firebase.google.com/docs/functions/locations).
+    type: select
+    options:
+      - label: Iowa (us-central1)
+        value: us-central1
+      - label: South Carolina (us-east1)
+        value: us-east1
+      - label: Northern Virginia (us-east4)
+        value: us-east4
+      - label: Los Angeles (us-west2)
+        value: us-west2
+      - label: Salt Lake City (us-west3)
+        value: us-west3
+      - label: Las Vegas (us-west4)
+        value: us-west4
+      - label: Warsaw (europe-central2)
+        value: europe-central2
+      - label: Belgium (europe-west1)
+        value: europe-west1
+      - label: London (europe-west2)
+        value: europe-west2
+      - label: Frankfurt (europe-west3)
+        value: europe-west3
+      - label: Zurich (europe-west6)
+        value: europe-west6
+      - label: Taiwan (asia-east1)
+        value: asia-east1
+      - label: Hong Kong (asia-east2)
+        value: asia-east2
+      - label: Tokyo (asia-northeast1)
+        value: asia-northeast1
+      - label: Osaka (asia-northeast2)
+        value: asia-northeast2
+      - label: Seoul (asia-northeast3)
+        value: asia-northeast3
+      - label: Mumbai (asia-south1)
+        value: asia-south1
+      - label: Singapore (asia-southeast1)
+        value: asia-southeast1
+      - label: Jakarta (asia-southeast2)
+        value: asia-southeast2
+      - label: Montreal (northamerica-northeast1)
+        value: northamerica-northeast1
+      - label: Sao Paulo (southamerica-east1)
+        value: southamerica-east1
+      - label: Sydney (australia-southeast1)
+        value: australia-southeast1
+    required: true
+    immutable: true
+
+  - param: MORALIS_API_KEY
+    label: Moralis API Key
+    description: >-
+      The API key that is retrievable from the Moralis Admin Panel.
+    type: secret
+    example: 6NkIpUJkuKlphOhBNVrpQq7fMB13v5Du5C6D90pZQRJS3bJssHblQc6Hh2rPLv3O
+    validationRegex: ^[a-zA-Z0-9]{64}$
+    validationErrorMessage: >-
+      The app ID must be retrieved from the Moralis Admin Panel.
+    required: true
+    immutable: false
+
+  - param: MAX_IP_CALLS_PER_MINUTE
+    label: Max IP Calls Per 1 Minute
+    description: >-
+      Rate limiting by IP address. Set 0 to disable that feature.
+    type: number
+    example: 40
+    required: true
+    immutable: false
