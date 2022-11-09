@@ -2,10 +2,10 @@ name: moralis-api
 version: 0.1.1
 specVersion: v1beta
 
-displayName: Moralis Web3 Api for Front-End Applications
+displayName: Moralis Web3 API for Front-End Applications
 
 description: >-
-  Call Moralis Api from the front-end application easily.
+  Call Moralis API from the front-end application easily.
 
 license: Apache-2.0
 
@@ -17,7 +17,7 @@ contributors:
   - authorName: Bart Tadych
     url: https://github.com/b4rtaz
 
-sourceUrl: https://github.com/MoralisWeb3/firebase-extensions/tree/main/streams
+sourceUrl: https://github.com/MoralisWeb3/firebase-extensions/tree/main/api
 
 billingRequired: true
 
