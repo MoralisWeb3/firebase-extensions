@@ -7,7 +7,7 @@
     "prepare": "npm run build",
     "build": "tsc",
     "lint": "eslint --ext .js,.ts src",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "test:watch": "jest --watch",
     "format": "prettier --write \"src/**/*.+(js|ts|json)\"",
     "format:check": "prettier --check \"src/**/*.+(js|ts|json)\""
