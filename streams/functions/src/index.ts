@@ -1,16 +1,11 @@
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
-import Moralis from 'moralis';
-import { CoreConfig } from 'moralis/core';
-
-import { IWebhook } from '@moralisweb3/streams-typings';
-
 import { config } from './config';
-import { LogsProcessor } from './logs-processor/LogsProcessor';
 import { FirestoreWriter } from './storage/FirestoreWriter';
-import { TxsProcessor } from './txs-processor/TxsProcessor';
-import { CollectionNameBuilder } from './core/CollectionNameBuilder';
-import { InternalTxsProcessor } from './internal-txs-processor/InternalTxsProcessor';
+import Moralis from 'moralis';
+import { CoreConfig } from 'moralis/common-core';
+import { BatchProcessor } from 'moralis/streams';
+import { IWebhook } from '@moralisweb3/streams-typings';
 
 const app = admin.initializeApp();
 const firestore = app.firestore();
@@ -20,10 +15,7 @@ Moralis.start({
 });
 Moralis.Core.config.set(CoreConfig.product, 'firebase-streams');
 
-const collectionNameBuilder = new CollectionNameBuilder();
-const logsProcessor = new LogsProcessor(collectionNameBuilder);
-const txsProcessor = new TxsProcessor(collectionNameBuilder);
-const internalTxProcessor = new InternalTxsProcessor(collectionNameBuilder);
+const batchProcessor = BatchProcessor.create();
 
 const firestoreWriter = new FirestoreWriter(firestore);
 
@@ -44,14 +36,16 @@ export const webhook = functions.handler.https.onRequest(async (req, res) => {
     return;
   }
 
-  const logUpdates = logsProcessor.process(batch);
-  const txUpdates = txsProcessor.process(batch);
-  const internalTxUpdates = internalTxProcessor.process(batch);
+  const result = batchProcessor.process(batch);
 
   const transactions = [
-    ...firestoreWriter.writeMany('moralis/events', logUpdates),
-    ...firestoreWriter.writeMany('moralis/txs', txUpdates),
-    ...firestoreWriter.writeMany('moralis/internalTxs', internalTxUpdates),
+    ...firestoreWriter.writeMany('moralis/events', result.logs()),
+    ...firestoreWriter.writeMany('moralis/txs', result.txs()),
+    ...firestoreWriter.writeMany('moralis/internalTxs', result.internalTxs()),
+    ...firestoreWriter.writeMany('moralis/erc20Transfers', result.erc20Transfers()),
+    ...firestoreWriter.writeMany('moralis/erc20Approvals', result.erc20Approvals()),
+    ...firestoreWriter.writeMany('moralis/nftTransfers', result.nftTransfers()),
+    ...firestoreWriter.writeMany('moralis/nftApprovals', result.nftApprovals()),
   ];
 
   await Promise.all(transactions);
