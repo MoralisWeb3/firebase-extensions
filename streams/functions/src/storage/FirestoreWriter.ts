@@ -1,5 +1,5 @@
+import { Document, Update } from 'moralis/streams';
 import * as admin from 'firebase-admin';
-import { Document, Update } from './Update';
 
 export class FirestoreWriter {
   public constructor(private readonly firestore: admin.firestore.Firestore) {}
