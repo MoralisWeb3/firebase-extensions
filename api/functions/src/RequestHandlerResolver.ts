@@ -19,12 +19,12 @@ const modules: Module[] = [
 
 export class RequestHandlerResolver {
   public static tryResolve(moduleName: string, operationName: string): RequestHandler | null {
-    const module = modules.find((module) => module.name === moduleName);
+    const module = modules.find((mod) => mod.name === moduleName);
     if (!module) {
       return null;
     }
 
-    const operation = module.operations.find((operation) => operation.name === operationName);
+    const operation = module.operations.find((op) => op.name === operationName);
     if (!operation) {
       return null;
     }
