@@ -26,13 +26,13 @@ roles:
     reason: Allows this extension to access Cloud Firestore to write data.
 
 resources:
-  - name: webhook
+  - name: call
     type: firebaseextensions.v1beta.function
-    description: The webhook for the Moralis Streams service.
+    description: API requests handler.
     properties:
       location: ${LOCATION}
       httpsTrigger: {}
-      runtime: "nodejs14"
+      runtime: "nodejs16"
 
 params:
   - param: LOCATION
