@@ -1,6 +1,8 @@
+Thanks for installing the extension! Check [our tutorial](https://docs.moralis.io/streams-api/integrations/firebase) to learn how to use it. If you prefer a video tutorial, you can find it [here](https://www.youtube.com/watch?v=EieJVLhpvsI).
+
 ### Firestore Security Rules
 
-Add **MANDATORY** security rules to the Firestore configuration (`firestore.rules`)
+Don't forget to add **MANDATORY** security rules to the Firestore configuration (`firestore.rules`)
 
 This step is very important, because this extension adds new documents to specific collections bases on your subscribed streams. These collections cannot be modified by external users. To achieve that we need to set specific permissions.
 

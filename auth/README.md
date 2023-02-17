@@ -1,6 +1,6 @@
 # Authenticate with Moralis Web3
 
-Signs in using Moralis Auth as the identity provider. 
+Signs in using Moralis Auth as the identity provider. Check [our tutorial](https://docs.moralis.io/authentication-api/integrations/firebase-nodejs) to learn how to use it.
 
 ### How to Install?
 
