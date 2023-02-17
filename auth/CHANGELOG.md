@@ -1,3 +1,7 @@
+## Version 0.1.5
+
+Added a tutorial link to docs.
+
 ## Version 0.1.4
 
 Update dependencies.
