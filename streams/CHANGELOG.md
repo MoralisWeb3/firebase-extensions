@@ -1,3 +1,7 @@
+## Version 0.1.12
+
+Added tutorial links to docs.
+
 ## Version 0.1.11
 
 Added support for `erc20Approvals`, `erc20Transfers`, `nftTokenApprovals` and `nftTransfers` collections. The extension saves these collections to the Firestore now.
