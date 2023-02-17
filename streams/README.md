@@ -1,6 +1,6 @@
 # Listen Blockchain by Moralis Streams
 
-Synchronize Blockchain state with your app easily.
+Synchronize Blockchain state with your app easily. Check [our tutorial](https://docs.moralis.io/streams-api/integrations/firebase) or [our video tutorial](https://www.youtube.com/watch?v=EieJVLhpvsI) to learn how to use it.
 
 ### How to Install?
 

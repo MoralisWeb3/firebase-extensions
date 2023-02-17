@@ -1,5 +1,5 @@
 name: moralis-streams
-version: 0.1.11
+version: 0.1.12
 specVersion: v1beta
 
 displayName: Listen Blockchain by Moralis Streams
@@ -98,6 +98,6 @@ params:
     example: 6NkIpUJkuKlphOhBNVrpQq7fMB13v5Du5C6D90pZQRJS3bJssHblQc6Hh2rPLv3O
     validationRegex: ^[a-zA-Z0-9]{64}$
     validationErrorMessage: >-
-      The app ID must be retrieved from the Moralis Admin Panel.
+      The API key must be retrieved from the Moralis Admin Panel.
     required: true
     immutable: false
