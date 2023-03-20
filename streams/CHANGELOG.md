@@ -1,3 +1,7 @@
+## Version 0.1.13
+
+Updated the PREINSTALL.md file.
+
 ## Version 0.1.12
 
 Added tutorial links to docs.
