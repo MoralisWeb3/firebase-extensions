@@ -1,3 +1,7 @@
+## Version 0.1.14
+
+Updated the name of the extension.
+
 ## Version 0.1.13
 
 Updated the PREINSTALL.md file.

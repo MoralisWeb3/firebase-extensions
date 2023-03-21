@@ -1,7 +1,7 @@
 {
   "name": "moralis-streams-firebase-extension",
-  "version": "0.1.13",
-  "description": "Listen Blockchain with Moralis Streams",
+  "version": "0.1.14",
+  "description": "Stream Blockchain Events to Firestore",
   "main": "lib/index.js",
   "scripts": {
     "prepare": "npm run build",

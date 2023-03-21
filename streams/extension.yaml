@@ -1,8 +1,8 @@
 name: moralis-streams
-version: 0.1.13
+version: 0.1.14
 specVersion: v1beta
 
-displayName: Listen Blockchain by Moralis Streams
+displayName: Stream Blockchain Events to Firestore
 
 description: >-
   Synchronize Blockchain state with your app easily.
