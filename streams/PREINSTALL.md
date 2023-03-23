@@ -6,13 +6,13 @@ Receive instant, customizable updates when something important happens on-chain.
 
 Monitor your users' transactions and balances with ease. Stream any on-chain event, including tokens, NFTs, and DeFi transactions, directly into your backend.
 
-![Get user asset transfers in real-time](.github/real-time-transfer.png)
+![Get user asset transfers in real-time](https://raw.githubusercontent.com/MoralisWeb3/firebase-extensions/feat/new-description/streams/.github/real-time-transfer.png)
 
 **Notify users automatically about Web3 events:**
 
 Maximize user engagement with real-time notifications. Stay ahead of the competition with seamless real-time updates and notifications for your user or wallet. Set filters to monitor relevant on-chain events; from your users' holdings to the latest token, NFT, and DeFi contracts events.
 
-![Notify users automatically about Web3 events](.github/web3-event-notification.png)
+![Notify users automatically about Web3 events](https://raw.githubusercontent.com/MoralisWeb3/firebase-extensions/feat/new-description/streams/.github/web3-event-notification.png)
 
 **The fastest way to get your smart contract events:**
 
