@@ -1,3 +1,9 @@
+## Version 0.1.15
+
+* Upgraded the `moralis` dependency to the latest version.
+* Updated the `PREINSTALL.md` file.
+* Fixed transaction bug.
+
 ## Version 0.1.14
 
 Updated the name of the extension.
