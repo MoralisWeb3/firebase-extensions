@@ -47,6 +47,8 @@ Before deploying your project, be sure that you set permissions correctly. You m
 
 **Step 4**: Deploy this extension: `firebase deploy --only extensions --project=<PROJECT_ID_OR_ALIAS>`
 
+Now you need to configure your streams in the Moralis admin panel. Check [our tutorial](https://docs.moralis.io/streams-api/integrations/firebase) or [our video tutorial](https://www.youtube.com/watch?v=EieJVLhpvsI).
+
 ## How do I setup a stream? 
 
 Setup Moralis Stream using:
