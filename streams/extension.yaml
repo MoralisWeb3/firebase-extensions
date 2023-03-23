@@ -1,5 +1,5 @@
 name: moralis-streams
-version: 0.1.14
+version: 0.1.15
 specVersion: v1beta
 
 displayName: Stream Blockchain Events to Firestore

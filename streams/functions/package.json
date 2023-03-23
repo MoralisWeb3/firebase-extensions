@@ -1,6 +1,6 @@
 {
   "name": "moralis-streams-firebase-extension",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "description": "Stream Blockchain Events to Firestore",
   "main": "lib/index.js",
   "scripts": {
@@ -18,7 +18,7 @@
     "@moralisweb3/streams-typings": "^1.0.6",
     "firebase-admin": "^10.3.0",
     "firebase-functions": "^3.23.0",
-    "moralis": "^2.10.3",
+    "moralis": "^2.17.0",
     "typescript": "^4.9.4",
     "@types/jest": "^29.0.3",
     "jest": "^29.1.1"
