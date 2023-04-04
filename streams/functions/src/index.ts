@@ -9,6 +9,9 @@ import { IWebhook } from '@moralisweb3/streams-typings';
 
 const app = admin.initializeApp();
 const firestore = app.firestore();
+firestore.settings({
+  ignoreUndefinedProperties: true,
+});
 
 Moralis.start({
   apiKey: config.moralisApiKey,
