@@ -1,6 +1,6 @@
 # Stream Blockchain Events to Firestore
 
-Use this extension as your backend to get notified about Web3 events automatically with [Moralis Stream](https://moralis.io/streams/).
+Use this extension as your backend to get notified about Web3 events automatically with [Moralis Streams](https://moralis.io/streams/).
 
 Receive instant, customizable updates when something important happens on-chain. We support all types of events, NFTs, DeFi, DAO, smart contracts, wallets, and more.
 

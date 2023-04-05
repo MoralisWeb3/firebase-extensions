@@ -1,3 +1,7 @@
+## Version 0.1.16
+
+Added support for triggers.
+
 ## Version 0.1.15
 
 * Upgraded the `moralis` dependency to the latest version.
