@@ -2,10 +2,10 @@ import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 import { config } from './config';
 import { FirestoreWriter } from './storage/FirestoreWriter';
-import Moralis from 'moralis';
+import { IWebhook } from '@moralisweb3/streams-typings';
 import { CoreConfig } from 'moralis/common-core';
 import { BatchProcessor } from 'moralis/streams';
-import { IWebhook } from '@moralisweb3/streams-typings';
+import Moralis from 'moralis';
 
 const app = admin.initializeApp();
 const firestore = app.firestore();
@@ -30,8 +30,7 @@ export const webhook = functions.handler.https.onRequest(async (req, res) => {
     !!batch &&
     !!signature &&
     Moralis.Streams.verifySignature({
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      body: batch as any,
+      body: batch,
       signature,
     });
   if (!isValidBatch) {
