@@ -1,3 +1,7 @@
+## Version 0.1.6
+
+Set challenge timeout to 60 seconds.
+
 ## Version 0.1.5
 
 Added a tutorial link to docs.
