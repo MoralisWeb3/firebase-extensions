@@ -51,7 +51,7 @@ export const requestMessage = functions.handler.https.onCall(async (data: Reques
   const websiteUrl = new URL(config.websiteUri);
 
   const params = {
-    timeout: 15,
+    timeout: 60,
     domain: websiteUrl.hostname,
     uri: websiteUrl.toString(),
     statement: 'To authenticate please sign this message.',
