@@ -1,3 +1,7 @@
+## Version 0.1.7
+
+Direct release from GitHub.
+
 ## Version 0.1.6
 
 Set challenge timeout to 60 seconds.
